@@ -1,0 +1,48 @@
+REM @ Limpeza Completa
+REM @ Senki
+
+taskkill /F /IM "ccleaner64.exe"
+taskkill /F /IM "ccleaner.exe"
+
+taskill /F /IM "DriverBooster.exe"
+
+
+REM ******************** Apagar Arquivos Temporários Do Windows ********************
+
+REM Apaga todas as pastas temporárias e arquivos temporários do usuário
+takeown /A /R /D Y /F C:\Users\%USERNAME%\AppData\Local\Temp\
+icacls C:\Users\%USERNAME%\AppData\Local\Temp\ /grant administradores:F /T /C
+rmdir /q /s C:\Users\%USERNAME%\AppData\Local\Temp\
+md C:\Users\%USERNAME%\AppData\Local\Temp\
+
+REM Apaga os arquivos de \Windows\Temp
+takeown /A /R /D Y /F C:\windows\temp
+icacls C:\windows\temp /grant administradores:F /T /C
+rmdir /q /s c:\windows\temp
+md c:\windows\temp
+
+REM Apaga arquivos de log
+del c:\windows\logs\cbs\*.log
+del C:\Windows\Logs\MoSetup\*.log
+del C:\Windows\Panther\*.log /s /q
+del C:\Windows\inf\*.log /s /q
+del C:\Windows\logs\*.log /s /q
+del C:\Windows\SoftwareDistribution\*.log /s /q
+del C:\Windows\Microsoft.NET\*.log /s /q
+del C:\Users\%USERNAME%\AppData\Local\Microsoft\Windows\WebCache\*.log /s /q
+del C:\Users\%USERNAME%\AppData\Local\Microsoft\Windows\SettingSync\*.log /s /q
+del C:\Users\%USERNAME%\AppData\Local\Microsoft\Windows\Explorer\ThumbCacheToDelete\*.tmp /s /q
+del C:\Users\%USERNAME%\AppData\Local\Microsoft\"Terminal Server Client"\Cache\*.bin /s /q
+rmdir /q /s C:\Users\%USERNAME%\AppData\Local\Microsoft\Windows\INetCache\
+
+
+REM *********** LIMPAR O DISCO ***********
+c:\windows\SYSTEM32\cleanmgr.exe
+
+REM ********* DESABILITAR ANIMAÇÕES PARA DESEMPENHO ***********
+C:\Windows\System32\SystemPropertiesAdvanced.exe
+
+REM ******** Limpar Logs *************
+C:\Windows\System32\mmc.exe
+
+exit
